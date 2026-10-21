@@ -4,6 +4,7 @@ from Lab2 import ArrayStack
 
 class Converter:
     OPERATORS = "+-*/^"
+
     def precedence(self, op):
         if op == "^":
             return 3
@@ -48,9 +49,15 @@ class Converter:
 
         return "\nPOSTFIX:" + output
 
-    def postfix_to_infix():
-        #code here
-        pass
+    def postfix_to_infix(self, expression):
+        stack = ArrayStack()
+        print(f"Expression entered: {expression}")
+        output = ""
+        for char in expression:
+            if char.isalpha() or char == "(":
+                stack.push(char)
+            print(stack)
+
 
 class main():
     converter = Converter()
@@ -66,6 +73,7 @@ class main():
             #call postfix to infix method
             case 2:
                 expression  = input("\nEnter Postfix expression: ")
+                converter.postfix_to_infix(expression)
                 pass
             case _:
                 break
