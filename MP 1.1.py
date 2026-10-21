@@ -51,12 +51,26 @@ class Converter:
 
     def postfix_to_infix(self, expression):
         stack = ArrayStack()
-        print(f"Expression entered: {expression}")
         output = ""
+
+        print(f"Expression entered: {expression}")
         for char in expression:
             if char.isalpha() or char == "(":
                 stack.push(char)
+
+            if char in self.OPERATORS:
+                op2 = stack.pop()
+                op1 = stack.pop()
+                stack.push(f"{op1}{char}{op2}")
+
+            if char == ")":
+                while not stack.is_empty() and stack.top() != "(":
+                    output += stack.pop()
+                if stack.is_empty():
+                    raise ValueError(f"Unmatched parentheses: No counterpart for {char}")
+            
             print(stack)
+            print(output)
 
 
 class main():
