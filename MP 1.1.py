@@ -10,6 +10,7 @@ class Converter:
         elif op == "*" or op == "/":
             return 2
         return 1
+
     def infix_to_postfix(self, expression):
         stack = ArrayStack()
         output = ""
@@ -45,8 +46,26 @@ class Converter:
                 raise ValueError("Unmatched '('.")
             output = output + top
 
-        return output
+        return "\nPOSTFIX:" + output
 
-converter = Converter()
+    def postfix_to_infix():
+        #code here
+        pass
 
-print(converter.infix_to_postfix("(a+b)*(a-b)"))
+class main():
+    converter = Converter()
+    while 1:
+        print("\n===== FIX CONVERTER =====")
+        choice = int(input("What do you want to do?\n1. Infix to Postfix\n2. Postfix to Infix\n3. Exit\n>> "))
+
+        match choice:
+            #call infix to postfix method
+            case 1:
+                expression  = input("\nEnter Infix expression: ")
+                print(converter.infix_to_postfix(expression))
+            #call postfix to infix method
+            case 2:
+                expression  = input("\nEnter Postfix expression: ")
+                pass
+            case _:
+                break
