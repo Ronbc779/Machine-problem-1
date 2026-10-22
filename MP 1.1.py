@@ -67,7 +67,7 @@ class Converter:
                 raise ValueError(f"Invalid character: No parentheses in postfix.")
             
             print(stack)
-            print(output)
+            print(output)#output is still empty bro
 
 
 class main():
