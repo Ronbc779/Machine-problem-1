@@ -25,7 +25,7 @@ class PalindromeChecker:
             if char == " ":
                 continue
             self.stack.push(char)
-
+        #check if it matches letter by letter
         for char in text:
             if self.stack.pop() != char:
                 return False
