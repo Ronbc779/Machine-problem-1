@@ -18,6 +18,11 @@ class OrderingSystem:
         order_date_time = order[2]
         total_price = 0
 
+        #prints error and returns to UI
+        if self.array_queue.is_empty() == True:
+            print("There are no orders to display")
+            return
+
         #prints out details of order 
         print(f"Order no. {order_num}, {order_date_time} has been completed:")
         #cycles through dict and prints item, quantity, and price
@@ -32,6 +37,10 @@ class OrderingSystem:
 
     #dequeues order at front index
     def remove_fulfilled_order(self):
+        #prints error and returns to UI
+        if self.array_queue.is_empty() == True:
+            print("There are no orders to remove")
+            return
         self.array_queue.dequeue()
 
 #MAIN========================
