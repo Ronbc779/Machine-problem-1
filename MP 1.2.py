@@ -12,19 +12,19 @@ class OrderingSystem:
 
     #getter for [order_number, order_items(dict), order_date] of front index
     def display_current_order(self):
-        order = self.array_queue.front()
-        order_num = order[0] 
-        order_list = order[1]
-        order_date_time = order[2]
-        total_price = 0
-
         #prints error and returns to UI
         if self.array_queue.is_empty() == True:
             print("There are no orders to display")
             return
+        
+        order = self.array_queue.front()
+        order_num = order[0] 
+        order_list = order[1]
+        order_date_time = order[2].strftime("%x, %X") 
+        total_price = 0
 
         #prints out details of order 
-        print(f"Order no. {order_num}, {order_date_time} has been completed:")
+        print(f"Order reference: {order_num} | {order_date_time} has been completed:")
         #cycles through dict and prints item, quantity, and price
         for menu_item,qty in order_list.items():
             #skips unordered menu items
@@ -55,10 +55,12 @@ while True:
     answer = input("[1]Add order, [2]Display current order, [3]Remove current: ")
     
     if answer.lower().strip() == "2":
+        print()
         order_system_obj.display_current_order()
         print()
         continue
     elif answer.lower().strip() == "3":
+        print()
         order_system_obj.remove_fulfilled_order()
         print()
         continue
@@ -72,8 +74,8 @@ while True:
         print("Sundae        Php 50")
         print("======================")
 
-        order_num = int(input("Enter custom receipt number here: "))
-        order_date_time = input("Enter date and time of transaction: ")
+        order_num = input("Enter custom receipt reference here: ")
+        order_date_time = datetime.datetime.now()
         
         #outer loop for continuous menu input
         order_validation = True
