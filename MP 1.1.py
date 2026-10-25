@@ -94,7 +94,7 @@ class Converter:
             if stack.top() in self.OPERATORS:
                 raise ValueError(f"Unmatched operator {stack.top()} <<<")
 
-        return stack.pop()
+        return "\nINFIX:" + stack.pop()
 
 
 class main():
