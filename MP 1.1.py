@@ -72,29 +72,43 @@ class Converter:
 
     def postfix_to_infix(self, expression):
         stack = ArrayStack()
+        output = ""
 
         for char in expression:
+            # Pushes for every operand
             if char.isalpha():
                 stack.push(char)
 
+            # Operator cases
             elif char in self.OPERATORS:
+                # Exceptions for popping with missing operands
+                if stack.is_empty():
+                    raise ValueError("Missing token: No operator for operand(s).")
                 op2 = stack.pop()
+                if stack.is_empty():
+                    raise ValueError(f"Missing token: No pairing operand.")
                 op1 = stack.pop()
+
+                # Reformat to inorder and push
                 stack.push(f"({op1}{char}{op2})")
 
+            # Handles parentheses    
             elif char in "()":
                 raise ValueError("Invalid character: No parentheses in postfix.")
 
+            # Handles invalid input
             else:
                 raise ValueError("Invalid character: Letter operands and valid operators only")
 
-        if not stack.is_empty():
-            if stack.top().isalpha():
-                raise ValueError(f"Unmatched operand(s) {stack.top()} <<<")
-            if stack.top() in self.OPERATORS:
-                raise ValueError(f"Unmatched operator {stack.top()} <<<")
+        # Pop resulting infix
+        output += stack.pop()
+        print(output)
 
-        return "\nINFIX:" + stack.pop()
+        # Exception for excess operands
+        if not stack.is_empty():
+            raise ValueError("Excess tokens: Missing operators.")
+
+        return "\nINFIX:" + output
 
 
 class main():
@@ -118,4 +132,4 @@ class main():
                 case _:
                     print("Error: Choose only 1, 2, or 3.")
         except ValueError as e:
-            print("Error: ", e)
+            print("Error:", e)
