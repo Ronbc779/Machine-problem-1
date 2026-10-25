@@ -83,11 +83,15 @@ class Converter:
             elif char in self.OPERATORS:
                 # Exceptions for popping with missing operands
                 if stack.is_empty():
-                    raise ValueError("Missing token: No operator for operand(s).")
+                    raise ValueError("Missing token: No operands for operator(s).")
                 op2 = stack.pop()
+
+                # Special case: Negative unary
                 if char == "-" and stack.is_empty():
                     stack.push(f"({char}{op2})")
+                # General case
                 else:
+                    # Same exception
                     if stack.is_empty():
                         raise ValueError(f"Missing token: No pairing operand.")
                     op1 = stack.pop()
@@ -105,7 +109,7 @@ class Converter:
 
         # Pop resulting infix
         output += stack.pop()
-        
+
         # Exception for excess operands
         if not stack.is_empty():
             raise ValueError("Excess tokens: Missing operators.")
