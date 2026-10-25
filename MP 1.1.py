@@ -51,23 +51,29 @@ class Converter:
 
     def postfix_to_infix(self, expression):
         stack = ArrayStack()
-        output = ""
 
-        print(f"Expression entered: {expression}")
         for char in expression:
             if char.isalpha():
                 stack.push(char)
 
-            if char in self.OPERATORS:
+            elif char in self.OPERATORS:
                 op2 = stack.pop()
                 op1 = stack.pop()
                 stack.push(f"{op1}{char}{op2}")
 
-            if char in "()":
-                raise ValueError(f"Invalid character: No parentheses in postfix.")
-            
-            print(stack)
-            print(output)#output is still empty bro
+            elif char in "()":
+                raise ValueError("Invalid character: No parentheses in postfix.")
+
+            else:
+                raise ValueError("Invalid character: Letter operands and valid operators only")
+
+        if stack.is_empty():
+            if stack.top().isalpha():
+                raise ValueError("Unmatched operands")
+            if stack.top() in self.OPERATORS:
+                raise ValueError("Unmatched operator")
+
+        return stack.pop()
 
 
 class main():
