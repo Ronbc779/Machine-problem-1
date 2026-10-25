@@ -4,6 +4,7 @@ class PalindromeChecker:
     def __init__(self):
         self.stack = ArrayStack
 
+    #removes unnecessary characters/special symbols and trailing spaces
     def clean(self, text):
         #error if empty
         if text == "":
