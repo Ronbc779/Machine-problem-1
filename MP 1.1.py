@@ -67,11 +67,11 @@ class Converter:
             else:
                 raise ValueError("Invalid character: Letter operands and valid operators only")
 
-        if stack.is_empty():
+        if not stack.is_empty():
             if stack.top().isalpha():
-                raise ValueError("Unmatched operands")
+                raise ValueError(f"Unmatched operand(s) {stack.top()} <<<")
             if stack.top() in self.OPERATORS:
-                raise ValueError("Unmatched operator")
+                raise ValueError(f"Unmatched operator {stack.top()} <<<")
 
         return stack.pop()
 
