@@ -85,12 +85,15 @@ class Converter:
                 if stack.is_empty():
                     raise ValueError("Missing token: No operator for operand(s).")
                 op2 = stack.pop()
-                if stack.is_empty():
-                    raise ValueError(f"Missing token: No pairing operand.")
-                op1 = stack.pop()
+                if char == "-" and stack.is_empty():
+                    stack.push(f"({char}{op2})")
+                else:
+                    if stack.is_empty():
+                        raise ValueError(f"Missing token: No pairing operand.")
+                    op1 = stack.pop()
 
-                # Reformat to inorder and push
-                stack.push(f"({op1}{char}{op2})")
+                    # Reformat to inorder and push
+                    stack.push(f"({op1}{char}{op2})")
 
             # Handles parentheses    
             elif char in "()":
@@ -102,14 +105,12 @@ class Converter:
 
         # Pop resulting infix
         output += stack.pop()
-        print(output)
-
+        
         # Exception for excess operands
         if not stack.is_empty():
             raise ValueError("Excess tokens: Missing operators.")
 
         return "\nINFIX:" + output
-
 
 class main():
     converter = Converter()
