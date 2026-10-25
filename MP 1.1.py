@@ -59,7 +59,7 @@ class Converter:
             elif char in self.OPERATORS:
                 op2 = stack.pop()
                 op1 = stack.pop()
-                stack.push(f"{op1}{char}{op2}")
+                stack.push(f"({op1}{char}{op2})")
 
             elif char in "()":
                 raise ValueError("Invalid character: No parentheses in postfix.")
@@ -90,7 +90,7 @@ class main():
             #call postfix to infix method
             case 2:
                 expression  = input("\nEnter Postfix expression: ")
-                converter.postfix_to_infix(expression)
+                print(converter.postfix_to_infix(expression))
                 pass
             case _:
                 break
