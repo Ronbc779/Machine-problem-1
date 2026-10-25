@@ -24,7 +24,10 @@ class OrderingSystem:
         total_price = 0
 
         #prints out details of order 
-        print(f"Order reference: {order_num} | {order_date_time} has been completed:")
+        print("========== RECEIPT ==========")
+        print(f"Order Reference: {order_num}")
+        print(f"Date & Time of Transaction: {order_date_time}")
+        print("Menu Items Ordered:")
         #cycles through dict and prints item, quantity, and price
         for menu_item,qty in order_list.items():
             #skips unordered menu items
@@ -34,13 +37,14 @@ class OrderingSystem:
             #updates total price while cycling through dict
             total_price += (qty * self.menu[menu_item])
         print(f"Total Price: {total_price}")
-
+        print("=============================")
     #dequeues order at front index
     def remove_fulfilled_order(self):
         #prints error and returns to UI
         if self.array_queue.is_empty() == True:
             print("There are no orders to remove")
             return
+        print(f"Order Reference {self.array_queue.front()[0]} has been completed and removed from interface")
         self.array_queue.dequeue()
 
 #MAIN========================
