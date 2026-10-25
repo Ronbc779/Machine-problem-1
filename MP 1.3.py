@@ -2,18 +2,18 @@ from Lab2 import ArrayStack
 
 class PalindromeChecker:
     def __init__(self):
-        self.stack = ArrayStack
+        self.stack = ArrayStack()
 
     #removes unnecessary characters/special symbols and trailing spaces
     def clean(self, text):
-        #error if empty
-        if text == "":
-            raise ValueError("Input must contain at least one letter or number.\n")
         cleaned = ""
         #keep letters and numbers only
         for char in text:
             if char.isalnum():
                 cleaned = cleaned + char.lower()
+        #error if empty
+        if cleaned == "":
+            raise ValueError("Input must contain at least one letter or number.\n")
         return cleaned
 
     def is_palindrome(self, text):
@@ -22,9 +22,6 @@ class PalindromeChecker:
         self.stack = ArrayStack()
 
         for char in text:
-            #skip if space
-            if char == " ":
-                continue
             self.stack.push(char)
         #check if it matches letter by letter
         for char in text:
