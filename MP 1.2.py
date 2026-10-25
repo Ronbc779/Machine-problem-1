@@ -52,7 +52,7 @@ while True:
     #resets after each iteration
     order = {"burger":0, "cheeseburger": 0, "fries":0, "soda":0, "sundae":0}
     
-    answer = input("[1]Add order, [2]Display current order, [3]Remove current: ")
+    answer = input("[1]Add order\n[2]Display current order\n[3]Remove current\n[4]Exit\nEnter: ")
     
     if answer.lower().strip() == "2":
         print()
@@ -64,6 +64,9 @@ while True:
         order_system_obj.remove_fulfilled_order()
         print()
         continue
+    elif answer.lower().strip() == "4":
+        print("\nExiting Program\n")
+        break
     #order loop
     elif answer.lower().strip() == "1":
         print("======== MENU ========")
