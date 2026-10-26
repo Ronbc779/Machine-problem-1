@@ -130,6 +130,6 @@ class main():
                 case 3:
                     break
                 case _:
-                    print("Error: Choose only 1, 2, or 3.")
+                    print("Error: Choose only 1, 2, 3, or 4.")
         except ValueError as e:
             print("Error:", e)
