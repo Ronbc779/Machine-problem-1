@@ -86,18 +86,13 @@ class Converter:
                     raise ValueError("Missing token: No operands for operator(s).")
                 op2 = stack.pop()
 
-                # Special case: Negative unary
-                if char == "-" and stack.is_empty():
-                    stack.push(f"({char}{op2})")
-                # General case
-                else:
-                    # Same exception
-                    if stack.is_empty():
-                        raise ValueError(f"Missing token: No pairing operand.")
-                    op1 = stack.pop()
+                #General case 
+                if stack.is_empty():                     # Same exception
+                    raise ValueError(f"Missing token: No pairing operand.")
+                op1 = stack.pop()
 
-                    # Reformat to inorder and push
-                    stack.push(f"({op1}{char}{op2})")
+                # Reformat to inorder and push
+                stack.push(f"({op1}{char}{op2})")
 
             # Handles parentheses    
             elif char in "()":
